@@ -1,6 +1,7 @@
 import os
 import unittest
 from os import remove
+import time
 from hw1.lib.FastaManipulation import clear_prot_seq_annots
 from hw1.lib.FastaManipulation import read_sequences
 from hw1.lib.FastaManipulation import write_annot_prot_seqs
@@ -26,18 +27,23 @@ TCTAGAGCCTGTATCTTCTGCTTTCCCTTAGACCCTCCTTGCCCAGCCCCGGGGTCGGGGGGGCCTGGACTTGGGCTGCA
 """
 
 _valid_fasta_infilename = 'test-valid.fasta'
-_outfilename = 'test-output.fasta'
+_outfilename0 = 'test-output0.fasta'
+_outfilename1 = 'test-output1.fasta'
+_outfilename2 = 'test-output2.fasta'
 
 class TestFastaManipulation(unittest.TestCase):
     def setUp(self):
         pass
 
     def tearDown(self):
-        clear_prot_seq_annots()
         if os.path.isfile(_valid_fasta_infilename):
             remove(_valid_fasta_infilename)
-        if os.path.isfile(_outfilename):
-            remove(_outfilename)
+        if os.path.isfile(_outfilename0):
+            remove(_outfilename0)
+        if os.path.isfile(_outfilename1):
+            remove(_outfilename1)
+        if os.path.isfile(_outfilename2):
+            remove(_outfilename2)
 
     def write_valid_fasta(self):
         tst_data_fptr = open(_valid_fasta_infilename, 'w+')
@@ -308,19 +314,20 @@ class TestFastaManipulation(unittest.TestCase):
         self.assertEqual(prot_seq,kv_pair[1],'Incorrect value')
 
     def test_write_annot_prot_seqs_1row(self):
+        # clear dictionary
+        clear_prot_seq_annots()
+
         # build dictionary
         add_prot_seq_annot('>name1', [3, 13, 34], 'AGEKHAGGQ')
 
-        expected_output = '>name1, putative cleavage sites: [3, 13, 34]\nAGEKHAGGQ'
-
         # write dictionary
-        write_annot_prot_seqs(_outfilename)
+        write_annot_prot_seqs(_outfilename0)
 
         # check file was created
-        self.assertTrue(os.path.exists(_outfilename))
+        self.assertTrue(os.path.exists(_outfilename0))
 
         # read test output
-        tst_fptr = open(_outfilename, 'r+')
+        tst_fptr = open(_outfilename0, 'r+')
         tst_output0 = tst_fptr.read()
         tst_fptr.close()
 
@@ -330,25 +337,28 @@ class TestFastaManipulation(unittest.TestCase):
 
         print
         print('Expected output')
-        print('!'+expected_output+'!')
+        print('!'+'>name1, putative cleavage sites: [3, 13, 34]\nAGEKHAGGQ'+'!')
 
-        self.assertEqual(expected_output,tst_output0,'Incorrect data')
+        self.assertEqual('>name1, putative cleavage sites: [3, 13, 34]\nAGEKHAGGQ',tst_output0,'Incorrect data')
 
     def test_write_annot_prot_seqs_2rows(self):
+        # clear dictionary
+        clear_prot_seq_annots()
+
         # build dictionary
         add_prot_seq_annot('>name1', [3, 13, 34], 'AGEKHAGGQ')
         add_prot_seq_annot('>name2', [4, 14, 35], 'GGLKAALGT')
 
-        expected_output = '>name1, putative cleavage sites: [3, 13, 34]\nAGEKHAGGQ\n>name2, putative cleavage sites: [4, 14, 35]\nGGLKAALGT'
+        '>name1, putative cleavage sites: [3, 13, 34]\nAGEKHAGGQ\n>name2, putative cleavage sites: [4, 14, 35]\nGGLKAALGT'
 
         # write dictionary
-        write_annot_prot_seqs(_outfilename)
+        write_annot_prot_seqs(_outfilename1)
 
         # check file was created
-        self.assertTrue(os.path.exists(_outfilename))
+        self.assertTrue(os.path.exists(_outfilename1))
 
         # read test output
-        tst_fptr = open(_outfilename, 'r+')
+        tst_fptr = open(_outfilename1, 'r+')
         tst_output0 = tst_fptr.read()
         tst_fptr.close()
 
@@ -358,25 +368,26 @@ class TestFastaManipulation(unittest.TestCase):
 
         print
         print('Expected output')
-        print('!'+expected_output+'!')
+        print('!'+'>name1, putative cleavage sites: [3, 13, 34]\nAGEKHAGGQ\n>name2, putative cleavage sites: [4, 14, 35]\nGGLKAALGT'+'!')
 
-        self.assertEqual(expected_output,tst_output0,'Incorrect data')
+        self.assertMultiLineEqual('>name1, putative cleavage sites: [3, 13, 34]\nAGEKHAGGQ\n>name2, putative cleavage sites: [4, 14, 35]\nGGLKAALGT',tst_output0,'Incorrect data')
 
     def test_write_annot_prot_seqs_1key_2prots(self):
+        # clear dictionary
+        clear_prot_seq_annots()
+
         # build dictionary
         add_prot_seq_annot('>name1', [], 'AGEKHAGGQ')
         add_prot_seq_annot('>name1', [], 'GGLKAALGT')
 
-        expected_output = '>name1, putative cleavage sites: <NONE>\nAGEKHAGGQ\nGGLKAALGT'
-
         # write dictionary
-        write_annot_prot_seqs(_outfilename)
+        write_annot_prot_seqs(_outfilename2)
 
         # check file was created
-        self.assertTrue(os.path.exists(_outfilename))
+        self.assertTrue(os.path.exists(_outfilename2))
 
         # read test output
-        tst_fptr = open(_outfilename, 'r+')
+        tst_fptr = open(_outfilename2, 'r+')
         tst_output0 = tst_fptr.read()
         tst_fptr.close()
 
@@ -386,9 +397,9 @@ class TestFastaManipulation(unittest.TestCase):
 
         print
         print('Expected output')
-        print('!'+expected_output+'!')
+        print('!'+'>name1, putative cleavage sites: <NONE>\nAGEKHAGGQ\nGGLKAALGT'+'!')
 
-        self.assertEqual(expected_output,tst_output0,'Incorrect data')
+        self.assertEqual('>name1, putative cleavage sites: <NONE>\nAGEKHAGGQ\nGGLKAALGT',tst_output0,'Incorrect data')
 
     def test_basic_prot(self):
         # basic
