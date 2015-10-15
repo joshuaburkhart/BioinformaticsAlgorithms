@@ -1,11 +1,12 @@
 # usage: python hw1.py infile [outfile]
 import os
 import sys
-from hw1.lib.FastaManipulation import read_sequences
-from hw1.lib.FastaManipulation import translate_to_prot
-from hw1.lib.FastaManipulation import find_put_clev_sites
-from hw1.lib.FastaManipulation import add_prot_seq_annot
-from hw1.lib.FastaManipulation import write_annot_prot_seqs
+
+from hw1.src.lib.FastaManipulation import read_sequences
+from hw1.src.lib.FastaManipulation import translate_to_prot
+from hw1.src.lib.FastaManipulation import find_put_clev_sites
+from hw1.src.lib.FastaManipulation import add_prot_seq_annot
+from hw1.src.lib.FastaManipulation import write_annot_prot_seqs
 
 __author__ = 'burkhart'
 

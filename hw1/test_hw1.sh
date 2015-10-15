@@ -4,7 +4,7 @@
 clear
 TMP_FILE=cur_stdout.tmp
 rm -f $TMP_FILE
-for f in hw1/test/Test*.py
+for f in src/test/Test*.py
 do
     echo "######################################################" $f >> $TMP_FILE
     f=$(echo $f | cut -d'.' -f1)
