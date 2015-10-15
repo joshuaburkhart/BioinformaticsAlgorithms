@@ -5,7 +5,7 @@ import sys
 # see https://github.com/joshuaburkhart/Riviere/blob/master/app/controllers/task_controller.rb
 
 __author__ = 'joshuaburkhart'
-_base_seq = 'ATCTATATATATATGGGGGGGGGGG'
+_base_seq = 'ACACACACACACACA'
 
 if len(sys.argv) < 2:
     print("query plz")
@@ -21,11 +21,11 @@ _query_seq = sys.argv[1]
 _hydrophobic = 'CAGVILMTKHYWF'
 print(_query_seq)
 print(_base_seq)
-choice = 0
 
 _dp_matrix = [[x for x in range(len(_query_seq))] for x in range(len(_base_seq))]
 
-def dp_access(i,j):
+
+def dp_access(i, j):
     if i < 0 and j < 0:
         return 0
     elif i < 0:
@@ -35,7 +35,8 @@ def dp_access(i,j):
     else:
         return _dp_matrix[i][j]
 
-def h(x,y):
+
+def h(x, y):
     if x == y:
         return 5
     elif x in _hydrophobic and y in _hydrophobic:
@@ -45,79 +46,101 @@ def h(x,y):
     else:
         return 0
 
+
 def fill_dp_matrix():
     global _dp_matrix
     for i in range(len(_base_seq)):
         for j in range(len(_query_seq)):
             _dp_matrix[i][j] = \
-                max(dp_access(i-1,j-1) + h(_base_seq[i],_query_seq[j]),
-                    dp_access(i-1,j) + _gap_const,
-                    dp_access(i,j-1) + _gap_const)
+                max(dp_access(i - 1, j - 1) + h(_base_seq[i], _query_seq[j]),
+                    dp_access(i - 1, j) + _gap_const,
+                    dp_access(i, j - 1) + _gap_const)
+
 
 def print_h_matrix():
     for c in range(len(_query_seq)):
-        print('{0}'.format(_query_seq[c]).center(4,' '),end='')
+        print(' {0}'.format(_query_seq[c]).center(4, ' '), end='')
     print()
     for i in range(len(_base_seq)):
-        print('{0}'.format(_base_seq[i]),end='')
+        print('{0}'.format(_base_seq[i]), end='')
         for j in range(len(_query_seq)):
             print('{0}'.format(h(_base_seq[i],
-                                 _query_seq[j])).center(4,' '),end='')
+                                 _query_seq[j])).center(4, ' '), end='')
         print()
+
 
 def print_dp_matrix():
     for c in range(len(_query_seq)):
-        print('{0}'.format(_query_seq[c]).center(4,' '),end='')
+        print(' {0}'.format(_query_seq[c]).center(4, ' '), end='')
     print()
     for i in range(len(_base_seq)):
-        print('{0}'.format(_base_seq[i]),end='')
+        print('{0}'.format(_base_seq[i]), end='')
         for j in range(len(_query_seq)):
-            print('{0}'.format(_dp_matrix[i][j]).center(4,' '),end='')
+            print('{0}'.format(_dp_matrix[i][j]).center(4, ' '), end='')
         print()
+
+
+# super duper cool recipe from http://code.activestate.com/recipes/384122/
+class Infix:
+    def __init__(self, function):
+        self.function = function
+
+    def __ror__(self, other):
+        return Infix(lambda x, self=self, other=other: self.function(other, x))
+
+    def __or__(self, other):
+        return self.function(other)
+
+    def __rlshift__(self, other):
+        return Infix(lambda x, self=self, other=other: self.function(other, x))
+
+    def __rshift__(self, other):
+        return self.function(other)
+
+    def __call__(self, value1):
+        return self.function(value1)
+
+
+IOB = Infix(lambda idx: idx < 0)
+
 
 def print_backtrack():
     a_base_seq = ''
     a_query_seq = ''
     i = len(_base_seq) - 1
     j = len(_query_seq) - 1
-    while i >= 0 or j >= 0:
-            choice = max(dp_access(i-1,j-1),
-                         dp_access(i,j-1),
-                         dp_access(i-1,j))
+    while not IOB | i or not IOB | j:
+        choice = max(dp_access(i - 1, j - 1),
+                     dp_access(i, j - 1),
+                     dp_access(i - 1, j))
 
-            if choice == dp_access(i-1,j-1):
-                global choice
-                #print('diagonal, choice={0}, b:{1}, q:{2}'.format(choice,a_base_seq,a_query_seq))
-                if i < 0:
-                    a_base_seq = '-' + a_base_seq
-                else:
-                    a_base_seq = _base_seq[i] + a_base_seq
-                if j < 0:
-                    a_query_seq = '-' + a_query_seq
-                else:
-                    a_query_seq = _query_seq[j] + a_query_seq
-                i -= 1
-                j -= 1
-            elif choice == dp_access(i,j - 1):
-                global choice
-                #print('left, choice={0}, b:{1}, q:{2}'.format(choice,a_base_seq,a_query_seq))
-                a_query_seq = _query_seq[j] + a_query_seq
-                if dp_access(i,j-1)>dp_access(i,j):
-                    a_base_seq = '-' + a_base_seq
-                else:
-                    a_base_seq = _base_seq[i] + a_base_seq
-                    i -= 1
-                j -= 1
+        if choice == dp_access(i - 1, j - 1):
+            if IOB | i:
+                a_base_seq = '-' + a_base_seq
             else:
-                global choice
-                #print('up, choice={0}, b:{1}, q:{2}'.format(choice,a_base_seq,a_query_seq))
                 a_base_seq = _base_seq[i] + a_base_seq
-                if dp_access(i-1,j)>dp_access(i,j):
-                    a_query_seq = '-' + a_query_seq
-                else:
-                    a_query_seq = _query_seq[j] + a_query_seq
-                    j -= 1
                 i -= 1
+            if IOB | j:
+                a_query_seq = '-' + a_query_seq
+            else:
+                a_query_seq = _query_seq[j] + a_query_seq
+                j -= 1
+        elif choice == dp_access(i, j - 1):
+            a_query_seq = _query_seq[j] + a_query_seq
+            if dp_access(i, j - 1) > dp_access(i, j):
+                a_base_seq = '-' + a_base_seq
+            else:
+                a_base_seq = _base_seq[i] + a_base_seq
+                i -= 1
+            j -= 1
+        else:
+            a_base_seq = _base_seq[i] + a_base_seq
+            if dp_access(i - 1, j) > dp_access(i, j):
+                a_query_seq = '-' + a_query_seq
+            else:
+                a_query_seq = _query_seq[j] + a_query_seq
+                j -= 1
+            i -= 1
     print(a_query_seq)
     print(a_base_seq)
 
@@ -126,10 +149,6 @@ print('query_seq: {0}'.format(_query_seq))
 print('h matrix:')
 print_h_matrix()
 print('dp matrix:')
-dp_matrix = fill_dp_matrix()
+fill_dp_matrix()
 print_dp_matrix()
 print_backtrack()
-
-
-
-
