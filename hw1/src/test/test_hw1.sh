@@ -2,9 +2,12 @@
 #Usage: sh test_hw1.sh
 
 clear
+PYTHONPATH_BAK=$PYTHONPATH
+BASE_PROJ=$(pwd | sed "s/\/hw1\/src\/test//")
+export PYTHONPATH="$BASE_PROJ:$PYTHONPATH"
 TMP_FILE=cur_stdout.tmp
 rm -f $TMP_FILE
-for f in src/test/Test*.py
+for f in Test*.py
 do
     echo "######################################################" $f >> $TMP_FILE
     f=$(echo $f | cut -d'.' -f1)
@@ -25,3 +28,7 @@ do
 done
 cat $TMP_FILE | sed '/^$/d'
 rm -f $TMP_FILE
+PYTHONPATH=$PYTHONPATH_BAK
+unset TMP_FILE
+unset PYTHONPATH_BAK
+unset BASE_PROJ

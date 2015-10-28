@@ -2,11 +2,11 @@
 import os
 import sys
 
-from hw1.src.lib.FastaManipulation import read_sequences
-from hw1.src.lib.FastaManipulation import translate_to_prot
-from hw1.src.lib.FastaManipulation import find_put_clev_sites
-from hw1.src.lib.FastaManipulation import add_prot_seq_annot
-from hw1.src.lib.FastaManipulation import write_annot_prot_seqs
+from src.lib.FastaManipulation import read_sequences
+from src.lib.FastaManipulation import translate_to_prot
+from src.lib.FastaManipulation import find_put_clev_sites
+from src.lib.FastaManipulation import add_prot_seq_annot
+from src.lib.FastaManipulation import write_annot_prot_seqs
 
 __author__ = 'burkhart'
 

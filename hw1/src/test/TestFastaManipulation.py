@@ -31,6 +31,7 @@ _outfilename0 = 'test-output0.fasta'
 _outfilename1 = 'test-output1.fasta'
 _outfilename2 = 'test-output2.fasta'
 
+
 class TestFastaManipulation(unittest.TestCase):
     def setUp(self):
         pass
@@ -58,7 +59,7 @@ class TestFastaManipulation(unittest.TestCase):
         sequences = read_sequences(_valid_fasta_infilename)
 
         # assure correct type
-        self.assertEqual(dict,type(sequences), 'Incorrect type')
+        self.assertEqual(dict, type(sequences), 'Incorrect type')
 
         # assure correct length
         self.assertEqual(len(sequences), 3, 'Incorrect length')
@@ -90,11 +91,11 @@ class TestFastaManipulation(unittest.TestCase):
 
         # assure correct k,v pairs
         self.assertEqual('AGGTCCACAGTCAGACAAGTAAAATAATGTAAAGGGCTACAGGAGCCACACCTTACTTACTTGTTGTGAGCATAACCCAA' \
-                        'GCTGATTAATCTACACATGGTAGTAGTATTCTCTAAAGATCTGTTGTTGCTGATGATGTTTATTGATCAAGCATGATTTA' \
-                        'GAGATTTATAGAGGAAACTTCATGCATCTTAGGACACTAGCCCTATTTCTACAACTTTACTCTCAACCTTGTCTCATCTT' \
-                        'TTATATACTTCTATCTCAAAATGTCTTCACCCAATTTAGTAGAGTTACATTCAATAAATGGTAGTTATAATTATTAACAG' \
-                        'TTTCTACTACAATGTAAGCTCCATGAGGACAAGAACCATTGTATGTCCCCAGTGCCTAATATAGTGAATGGTACACATAG' \
-                        'TTGCTTGATAACTATTTGGGAAATGAATGGCTGAGTGGTATGAGAAAGGCAAGTGACATGCTTCCTCAGTTCAAGACTAA',
+                         'GCTGATTAATCTACACATGGTAGTAGTATTCTCTAAAGATCTGTTGTTGCTGATGATGTTTATTGATCAAGCATGATTTA' \
+                         'GAGATTTATAGAGGAAACTTCATGCATCTTAGGACACTAGCCCTATTTCTACAACTTTACTCTCAACCTTGTCTCATCTT' \
+                         'TTATATACTTCTATCTCAAAATGTCTTCACCCAATTTAGTAGAGTTACATTCAATAAATGGTAGTTATAATTATTAACAG' \
+                         'TTTCTACTACAATGTAAGCTCCATGAGGACAAGAACCATTGTATGTCCCCAGTGCCTAATATAGTGAATGGTACACATAG' \
+                         'TTGCTTGATAACTATTTGGGAAATGAATGGCTGAGTGGTATGAGAAAGGCAAGTGACATGCTTCCTCAGTTCAAGACTAA',
                          sequences['>gi|225543218|ref|NG_011641.1| Homo sapiens solute ' \
                                    'carrier family 16, member 2 (monocarboxylic acid ' \
                                    'transporter 8) (SLC16A2) on chromosome X'],
@@ -121,10 +122,10 @@ class TestFastaManipulation(unittest.TestCase):
         prot_seqs = translate_to_prot(valid_dna0)
 
         # assure correct type
-        self.assertEqual(list,type(prot_seqs),'Incorrect type')
+        self.assertEqual(list, type(prot_seqs), 'Incorrect type')
 
         # assure correct length
-        self.assertEqual(3,len(prot_seqs),'Incorrect length')
+        self.assertEqual(3, len(prot_seqs), 'Incorrect length')
 
         # assure protein sequences shorter than dna sequence
         self.assertTrue(len(prot_seqs[0]) <= len(valid_dna0), 'Too many prots')
@@ -132,9 +133,9 @@ class TestFastaManipulation(unittest.TestCase):
         self.assertTrue(len(prot_seqs[2]) <= len(valid_dna0), 'Too many prots')
 
         # assure protein translated correctly
-        self.assertEqual(valid_dna0_pro0,prot_seqs[0],'Incorrect prot translation')
-        self.assertEqual(valid_dna0_pro1,prot_seqs[1],'Incorrect prot translation')
-        self.assertEqual(valid_dna0_pro2,prot_seqs[2],'Incorrect prot translation')
+        self.assertEqual(valid_dna0_pro0, prot_seqs[0], 'Incorrect prot translation')
+        self.assertEqual(valid_dna0_pro1, prot_seqs[1], 'Incorrect prot translation')
+        self.assertEqual(valid_dna0_pro2, prot_seqs[2], 'Incorrect prot translation')
 
         print(valid_dna0)
         print("".join([(x + "  ") for x in prot_seqs[0]]))
@@ -150,10 +151,10 @@ class TestFastaManipulation(unittest.TestCase):
         prot_seqs = translate_to_prot(valid_dna1)
 
         # assure correct type
-        self.assertEqual(list,type(prot_seqs),'Incorrect type')
+        self.assertEqual(list, type(prot_seqs), 'Incorrect type')
 
         # assure correct length
-        self.assertEqual(3,len(prot_seqs),'Incorrect length')
+        self.assertEqual(3, len(prot_seqs), 'Incorrect length')
 
         # assure protein sequences shorter than dna sequence
         self.assertTrue(len(prot_seqs[0]) <= len(valid_dna1), 'Too many prots')
@@ -161,9 +162,9 @@ class TestFastaManipulation(unittest.TestCase):
         self.assertTrue(len(prot_seqs[2]) <= len(valid_dna1), 'Too many prots')
 
         # assure protein translated correctly
-        self.assertEqual(valid_dna1_pro0,prot_seqs[0],'Incorrect prot translation')
-        self.assertEqual(valid_dna1_pro1,prot_seqs[1],'Incorrect prot translation')
-        self.assertEqual(valid_dna1_pro2,prot_seqs[2],'Incorrect prot translation')
+        self.assertEqual(valid_dna1_pro0, prot_seqs[0], 'Incorrect prot translation')
+        self.assertEqual(valid_dna1_pro1, prot_seqs[1], 'Incorrect prot translation')
+        self.assertEqual(valid_dna1_pro2, prot_seqs[2], 'Incorrect prot translation')
 
         print(valid_dna1)
         print("".join([(x + "  ") for x in prot_seqs[0]]))
@@ -179,10 +180,10 @@ class TestFastaManipulation(unittest.TestCase):
         prot_seqs = translate_to_prot(valid_dna2)
 
         # assure correct type
-        self.assertEqual(list,type(prot_seqs),'Incorrect type')
+        self.assertEqual(list, type(prot_seqs), 'Incorrect type')
 
         # assure correct length
-        self.assertEqual(3,len(prot_seqs),'Incorrect length')
+        self.assertEqual(3, len(prot_seqs), 'Incorrect length')
 
         # assure protein sequences shorter than dna sequence
         self.assertTrue(len(prot_seqs[0]) <= len(valid_dna2), 'Too many prots')
@@ -190,9 +191,9 @@ class TestFastaManipulation(unittest.TestCase):
         self.assertTrue(len(prot_seqs[2]) <= len(valid_dna2), 'Too many prots')
 
         # assure protein translated correctly
-        self.assertEqual(valid_dna2_pro0,prot_seqs[0],'Incorrect prot translation')
-        self.assertEqual(valid_dna2_pro1,prot_seqs[1],'Incorrect prot translation')
-        self.assertEqual(valid_dna2_pro2,prot_seqs[2],'Incorrect prot translation')
+        self.assertEqual(valid_dna2_pro0, prot_seqs[0], 'Incorrect prot translation')
+        self.assertEqual(valid_dna2_pro1, prot_seqs[1], 'Incorrect prot translation')
+        self.assertEqual(valid_dna2_pro2, prot_seqs[2], 'Incorrect prot translation')
 
         print(valid_dna2)
         print("".join([(x + "  ") for x in prot_seqs[0]]))
@@ -208,14 +209,14 @@ class TestFastaManipulation(unittest.TestCase):
         put_clevs = find_put_clev_sites(valid_prot_seq0)
 
         # assure correct type
-        self.assertEqual(list,type(put_clevs),'Incorrect type')
+        self.assertEqual(list, type(put_clevs), 'Incorrect type')
 
         # assure correct length
-        self.assertEqual(2,len(put_clevs),'Incorrect length')
+        self.assertEqual(2, len(put_clevs), 'Incorrect length')
 
         # assure correct putative cleavage sites
-        self.assertEqual(valid_prot_seq0_clev0,put_clevs[0],'Incorrect clev sites')
-        self.assertEqual(valid_prot_seq0_clev1,put_clevs[1],'Incorrect clev sites')
+        self.assertEqual(valid_prot_seq0_clev0, put_clevs[0], 'Incorrect clev sites')
+        self.assertEqual(valid_prot_seq0_clev1, put_clevs[1], 'Incorrect clev sites')
 
         print(valid_prot_seq0)
         indicator = list(' ' * len(valid_prot_seq0))
@@ -234,15 +235,15 @@ class TestFastaManipulation(unittest.TestCase):
         put_clevs = find_put_clev_sites(valid_prot_seq1)
 
         # assure correct type
-        self.assertEqual(list,type(put_clevs),'Incorrect type')
+        self.assertEqual(list, type(put_clevs), 'Incorrect type')
 
         # assure correct length
-        self.assertEqual(3,len(put_clevs),'Incorrect length')
+        self.assertEqual(3, len(put_clevs), 'Incorrect length')
 
         # assure correct putative cleavage sites
-        self.assertEqual(valid_prot_seq1_clev0,put_clevs[0],'Incorrect clev sites')
-        self.assertEqual(valid_prot_seq1_clev1,put_clevs[1],'Incorrect clev sites')
-        self.assertEqual(valid_prot_seq1_clev2,put_clevs[2],'Incorrect clev sites')
+        self.assertEqual(valid_prot_seq1_clev0, put_clevs[0], 'Incorrect clev sites')
+        self.assertEqual(valid_prot_seq1_clev1, put_clevs[1], 'Incorrect clev sites')
+        self.assertEqual(valid_prot_seq1_clev2, put_clevs[2], 'Incorrect clev sites')
 
         print(valid_prot_seq1)
         indicator = list(' ' * len(valid_prot_seq1))
@@ -262,16 +263,16 @@ class TestFastaManipulation(unittest.TestCase):
         kv_pair = add_prot_seq_annot(seq_name, put_clevs, prot_seq)
 
         # assure correct type
-        self.assertEqual(list,type(kv_pair),'Incorrect type')
+        self.assertEqual(list, type(kv_pair), 'Incorrect type')
 
         # assure correct length
-        self.assertEqual(2,len(kv_pair),'Incorrect length')
+        self.assertEqual(2, len(kv_pair), 'Incorrect length')
 
         # assure correct key
-        self.assertEqual(expected_name,kv_pair[0],'Incorrect key')
+        self.assertEqual(expected_name, kv_pair[0], 'Incorrect key')
 
         # assure correct value
-        self.assertEqual(prot_seq,kv_pair[1],'Incorrect value')
+        self.assertEqual(prot_seq, kv_pair[1], 'Incorrect value')
 
     def test_add_prot_seq_annot_no_prot_seq(self):
         seq_name = '>name0'
@@ -282,16 +283,16 @@ class TestFastaManipulation(unittest.TestCase):
         kv_pair = add_prot_seq_annot(seq_name, put_clevs, prot_seq)
 
         # assure correct type
-        self.assertEqual(list,type(kv_pair),'Incorrect type')
+        self.assertEqual(list, type(kv_pair), 'Incorrect type')
 
         # assure correct length
-        self.assertEqual(2,len(kv_pair),'Incorrect length')
+        self.assertEqual(2, len(kv_pair), 'Incorrect length')
 
         # assure correct key
-        self.assertEqual(expected_name,kv_pair[0],'Incorrect key')
+        self.assertEqual(expected_name, kv_pair[0], 'Incorrect key')
 
         # assure correct value
-        self.assertEqual(prot_seq,kv_pair[1],'Incorrect value')
+        self.assertEqual(prot_seq, kv_pair[1], 'Incorrect value')
 
     def test_add_prot_seq_annot_no_cleavage_sites(self):
         seq_name = '>name0'
@@ -302,16 +303,16 @@ class TestFastaManipulation(unittest.TestCase):
         kv_pair = add_prot_seq_annot(seq_name, put_clevs, prot_seq)
 
         # assure correct type
-        self.assertEqual(list,type(kv_pair),'Incorrect type')
+        self.assertEqual(list, type(kv_pair), 'Incorrect type')
 
         # assure correct length
-        self.assertEqual(2,len(kv_pair),'Incorrect length')
+        self.assertEqual(2, len(kv_pair), 'Incorrect length')
 
         # assure correct key
-        self.assertEqual(expected_name,kv_pair[0],'Incorrect key')
+        self.assertEqual(expected_name, kv_pair[0], 'Incorrect key')
 
         # assure correct value
-        self.assertEqual(prot_seq,kv_pair[1],'Incorrect value')
+        self.assertEqual(prot_seq, kv_pair[1], 'Incorrect value')
 
     def test_write_annot_prot_seqs_1row(self):
         # clear dictionary
@@ -333,13 +334,13 @@ class TestFastaManipulation(unittest.TestCase):
 
         print
         print('Actual output')
-        print('!'+tst_output0+'!')
+        print('!' + tst_output0 + '!')
 
         print
         print('Expected output')
-        print('!'+'>name1, putative cleavage sites: [3, 13, 34]\nAGEKHAGGQ'+'!')
+        print('!' + '>name1, putative cleavage sites: [3, 13, 34]\nAGEKHAGGQ' + '!')
 
-        self.assertEqual('>name1, putative cleavage sites: [3, 13, 34]\nAGEKHAGGQ',tst_output0,'Incorrect data')
+        self.assertEqual('>name1, putative cleavage sites: [3, 13, 34]\nAGEKHAGGQ', tst_output0, 'Incorrect data')
 
     def test_write_annot_prot_seqs_2rows(self):
         # clear dictionary
@@ -364,13 +365,16 @@ class TestFastaManipulation(unittest.TestCase):
 
         print
         print('Actual output')
-        print('!'+tst_output0+'!')
+        print('!' + tst_output0 + '!')
 
         print
         print('Expected output')
-        print('!'+'>name1, putative cleavage sites: [3, 13, 34]\nAGEKHAGGQ\n>name2, putative cleavage sites: [4, 14, 35]\nGGLKAALGT'+'!')
+        print(
+            '!' + '>name1, putative cleavage sites: [3, 13, 34]\nAGEKHAGGQ\n>name2, putative cleavage sites: [4, 14, 35]\nGGLKAALGT' + '!')
 
-        self.assertMultiLineEqual('>name1, putative cleavage sites: [3, 13, 34]\nAGEKHAGGQ\n>name2, putative cleavage sites: [4, 14, 35]\nGGLKAALGT',tst_output0,'Incorrect data')
+        self.assertMultiLineEqual(
+            '>name1, putative cleavage sites: [3, 13, 34]\nAGEKHAGGQ\n>name2, putative cleavage sites: [4, 14, 35]\nGGLKAALGT',
+            tst_output0, 'Incorrect data')
 
     def test_write_annot_prot_seqs_1key_2prots(self):
         # clear dictionary
@@ -393,38 +397,38 @@ class TestFastaManipulation(unittest.TestCase):
 
         print
         print('Actual output')
-        print('!'+tst_output0+'!')
+        print('!' + tst_output0 + '!')
 
         print
         print('Expected output')
-        print('!'+'>name1, putative cleavage sites: <NONE>\nAGEKHAGGQ\nGGLKAALGT'+'!')
+        print('!' + '>name1, putative cleavage sites: <NONE>\nAGEKHAGGQ\nGGLKAALGT' + '!')
 
-        self.assertEqual('>name1, putative cleavage sites: <NONE>\nAGEKHAGGQ\nGGLKAALGT',tst_output0,'Incorrect data')
+        self.assertEqual('>name1, putative cleavage sites: <NONE>\nAGEKHAGGQ\nGGLKAALGT', tst_output0, 'Incorrect data')
 
     def test_basic_prot(self):
         # basic
-        self.assertTrue(basic_prot('K'),'Should be basic')
-        self.assertTrue(basic_prot('R'),'Should be basic')
-        self.assertTrue(basic_prot('H'),'Should be basic')
+        self.assertTrue(basic_prot('K'), 'Should be basic')
+        self.assertTrue(basic_prot('R'), 'Should be basic')
+        self.assertTrue(basic_prot('H'), 'Should be basic')
 
         # not
-        self.assertFalse(basic_prot('G'),'Should not be basic')
-        self.assertFalse(basic_prot('F'),'Should not be basic')
-        self.assertFalse(basic_prot('L'),'Should not be basic')
-        self.assertFalse(basic_prot('S'),'Should not be basic')
-        self.assertFalse(basic_prot('Y'),'Should not be basic')
-        self.assertFalse(basic_prot('C'),'Should not be basic')
-        self.assertFalse(basic_prot('W'),'Should not be basic')
-        self.assertFalse(basic_prot('P'),'Should not be basic')
-        self.assertFalse(basic_prot('Q'),'Should not be basic')
-        self.assertFalse(basic_prot('I'),'Should not be basic')
-        self.assertFalse(basic_prot('M'),'Should not be basic')
-        self.assertFalse(basic_prot('T'),'Should not be basic')
-        self.assertFalse(basic_prot('N'),'Should not be basic')
-        self.assertFalse(basic_prot('V'),'Should not be basic')
-        self.assertFalse(basic_prot('A'),'Should not be basic')
-        self.assertFalse(basic_prot('D'),'Should not be basic')
-        self.assertFalse(basic_prot('E'),'Should not be basic')
+        self.assertFalse(basic_prot('G'), 'Should not be basic')
+        self.assertFalse(basic_prot('F'), 'Should not be basic')
+        self.assertFalse(basic_prot('L'), 'Should not be basic')
+        self.assertFalse(basic_prot('S'), 'Should not be basic')
+        self.assertFalse(basic_prot('Y'), 'Should not be basic')
+        self.assertFalse(basic_prot('C'), 'Should not be basic')
+        self.assertFalse(basic_prot('W'), 'Should not be basic')
+        self.assertFalse(basic_prot('P'), 'Should not be basic')
+        self.assertFalse(basic_prot('Q'), 'Should not be basic')
+        self.assertFalse(basic_prot('I'), 'Should not be basic')
+        self.assertFalse(basic_prot('M'), 'Should not be basic')
+        self.assertFalse(basic_prot('T'), 'Should not be basic')
+        self.assertFalse(basic_prot('N'), 'Should not be basic')
+        self.assertFalse(basic_prot('V'), 'Should not be basic')
+        self.assertFalse(basic_prot('A'), 'Should not be basic')
+        self.assertFalse(basic_prot('D'), 'Should not be basic')
+        self.assertFalse(basic_prot('E'), 'Should not be basic')
 
 
 if __name__ == '__main__':

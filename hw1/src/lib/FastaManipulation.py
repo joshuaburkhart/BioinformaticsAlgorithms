@@ -1,5 +1,3 @@
-import sys
-from os import path
 import re
 
 __author__ = 'burkhart'
