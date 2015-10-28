@@ -1,0 +1,12 @@
+For this homework, please consider the attached alignment file (hw3.txt) which contains 3 sequences. 
+
+If a column has a gap, for this assignment ignore the column.
+
+Provide well commented code (python or otherwise) that can take this file and calculate two scores:
+
+    minimum entropy  (10 pts)
+    sum of pairs  (10 pts)
+
+ 
+
+Please utilize a BLOSUM62 substitution matrix for (ii)
