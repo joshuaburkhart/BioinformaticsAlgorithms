@@ -15,8 +15,6 @@ _gap_penalty = -2
 _s1 = sys.argv[1]
 _s2 = sys.argv[2]
 _hydrophobic = 'CAGVILMTKHYWF'
-print(_s1)
-print(_s2)
 
 _s1 = ' ' + _s1
 _s2 = ' ' + _s2
