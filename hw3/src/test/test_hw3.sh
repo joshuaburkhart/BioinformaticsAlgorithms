@@ -12,7 +12,7 @@ do
     echo "######################################################" $f >> $TMP_FILE
     f=$(echo $f | cut -d'.' -f1)
     f=$(echo $f | sed "s/\//\./g")
-    python -m $f >> $TMP_FILE 2>&1
+    python3 -m $f >> $TMP_FILE 2>&1
     if grep -q Fail $TMP_FILE;
     then
         echo "FAILURE DETECTED"

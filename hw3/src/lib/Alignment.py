@@ -1,7 +1,8 @@
 __author__ = 'burkhart'
 
+ILLEGAL_CHARS = '-\n'
 
-class Alignment:
+class MultipleAlignment:
 
     def __init__(self):
         self.sequence_matrix = []
@@ -16,7 +17,8 @@ class Alignment:
     def sum_aligned_char_scores(self,scoring_function,*sf_args):
         sum = 0.0
         for aligned_chars in self.sequence_matrix:
-            sum += scoring_function(aligned_chars,sf_args)
+            if all(char not in ILLEGAL_CHARS for char in aligned_chars):
+                sum += scoring_function(aligned_chars,sf_args)
         return sum
 
     def minimize_aligned_char_scores(self,scoring_function,*sf_args):

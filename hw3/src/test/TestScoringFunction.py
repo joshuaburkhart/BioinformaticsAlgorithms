@@ -5,9 +5,9 @@ from hw3.src.lib.ScoringMatrix import blosum_62
 
 __author__ = 'burkhart'
 
-EPSILON = 0.01
+S_FUNC_EPSILON = 0.01
 
-class TestFastaManipulation(unittest.TestCase):
+class TestScoringFunction(unittest.TestCase):
 
     def setUp(self):
         pass
@@ -17,23 +17,23 @@ class TestFastaManipulation(unittest.TestCase):
 
     def te_helper(self,bp_alignment,expect):
         actual = entropy(bp_alignment,())
-        self.assertLess(abs(actual - expect),EPSILON,
+        self.assertLess(abs(actual - expect),S_FUNC_EPSILON,
                         "Incorrect entropy of {0}: {1} "
                         "(expected {2} to be within {3})".format(
                             bp_alignment,
                             actual,
                             expect,
-                            EPSILON))
+                            S_FUNC_EPSILON))
 
     def sp_helper(self,bp_alignment,expect,*matrix_wrapper):
         actual = sum_of_pairs(bp_alignment,matrix_wrapper)
-        self.assertLess(abs(actual - expect),EPSILON,
+        self.assertLess(abs(actual - expect),S_FUNC_EPSILON,
                         "Incorrect sop of {0}: {1} "
                         "(expected {2} to be within {3})".format(
                             bp_alignment,
                             actual,
                             expect,
-                            EPSILON))
+                            S_FUNC_EPSILON))
 
     def test_entropy_1(self):
         """Entropy Compeau, P, Pevzner, P,c Active

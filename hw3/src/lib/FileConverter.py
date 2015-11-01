@@ -1,24 +1,21 @@
 import re
-from src.lib.Alignment import Alignment
 
 __author__ = 'burkhart'
 
-_matrix_header = '^[ARNDCQEGHILKMFPSTWYVBZX *]+'
-_matrix_data = '^[ARNDCQEGHILKMFPSTWYVBZX*][0-9- ]+'
-_aligned_seq = '^[ARNDCQEGHILKMFPSTWYVBZX-]+'
+MTRIX_HEAD_RGX = '^[ARNDCQEGHILKMFPSTWYVBZX *]+'
+MTRIX_DATA_RGX = '^[ARNDCQEGHILKMFPSTWYVBZX*][0-9- ]+'
+ALIGND_SEQ_RGX = '^[ARNDCQEGHILKMFPSTWYVBZX-]+'
 
 
-def txt_2_alignment(filename):
-    a = Alignment()
+def add_alignments_from_txt(filename,alignment):
     in_fptr = open(filename, 'r')
     while 1:
         line = in_fptr.readline()
         if not line:
             break
-        if re.match(_aligned_seq,line):
-            a.add_sequence(line)
+        if re.match(ALIGND_SEQ_RGX,line):
+            alignment.add_sequence(line.rstrip())
     in_fptr.close()
-    return a
 
 
 def matrix_2_dictsource(filename):
@@ -28,11 +25,11 @@ def matrix_2_dictsource(filename):
         line = in_fptr.readline()
         if not line:
             break
-        if re.match(_matrix_data,line):
+        if re.match(MTRIX_DATA_RGX,line):
             data = [x for x in line.split(' ') if x]
             for x in range(len(header)):
                 d[frozenset([data[0],header[x]])] = float(data[x + 1])
-        elif re.match(_matrix_header,line):
+        elif re.match(MTRIX_HEAD_RGX,line):
             header = [x for x in line.split(' ') if x]
     in_fptr.close()
     return d
