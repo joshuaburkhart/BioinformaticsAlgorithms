@@ -1,6 +1,7 @@
 *.pyc
 *.zip
 .idea/*.iml
+.idea/*.xml
 .idea/misc.xml
 .idea/workspace.xml
 *.DS_Store

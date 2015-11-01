@@ -94,6 +94,13 @@ ILLEGAL_CHARS = '-\n'
 
 
 def blosum_62(char_i, char_j):
+    """
+    simply wraps dictionary and returns 0 in the
+    case illegal chars are found
+    :param char_i:
+    :param char_j:
+    :return:
+    """
     if char_i not in ILLEGAL_CHARS and char_j not in ILLEGAL_CHARS:
         return BLOSUM62[frozenset([char_i, char_j])]
     return 0

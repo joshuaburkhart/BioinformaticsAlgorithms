@@ -1,3 +1,4 @@
+# coding=utf-8
 import unittest
 
 from hw3.src.lib.Alignment import MultipleAlignment
@@ -48,13 +49,13 @@ class TestAlignment(unittest.TestCase):
     def test_add_sequence_3(self):
         self.as_helper('KMFP----')
 
-    def test_add_sequence_3(self):
+    def test_add_sequence_4(self):
         self.as_helper('---PSTWY')
 
-    def test_add_sequence_4(self):
+    def test_add_sequence_5(self):
         self.as_helper('------')
 
-    def test_add_sequence_5(self):
+    def test_add_sequence_6(self):
         self.as_helper('-')
 
     def test_add_sequences_1(self):
