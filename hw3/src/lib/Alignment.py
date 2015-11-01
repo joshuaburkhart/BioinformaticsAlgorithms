@@ -32,7 +32,7 @@ class MultipleAlignment:
 
     def sum_aligned_char_scores(self, scoring_function, *sf_args):
         """
-        addition associates. aligned characters of matrix
+        addition commutes. aligned characters of matrix
         are summed, simulating the summation of whichever
         scoring function
         :param scoring_function:
