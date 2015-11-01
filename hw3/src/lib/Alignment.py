@@ -14,7 +14,13 @@ class Alignment:
                 self.sequence_matrix.append(char)
 
     def sum_aligned_char_scores(self,scoring_function,*sf_args):
-        sum = 0
+        sum = 0.0
         for aligned_chars in self.sequence_matrix:
             sum += scoring_function(aligned_chars,sf_args)
         return sum
+
+    def minimize_aligned_char_scores(self,scoring_function,*sf_args):
+        score_list = []
+        for aligned_chars in self.sequence_matrix:
+            score_list.append(scoring_function(aligned_chars,sf_args))
+        return min(score_list)
