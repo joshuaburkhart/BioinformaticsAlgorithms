@@ -27,12 +27,14 @@ def max_in_window(transcript_dict, alt_set, window_size):
             print('.',end="")
             sys.stdout.flush()
             print('window:{0}'.format(window))
-            first_alt_pos = w_pos
+            first_alt_pos = 0
+            p_cntr = w_pos
             cur_alts = 0
             for exon_pos in window:
                 if exon_pos in alt_set:
                     cur_alts += 1
-                first_alt_pos += 1 # just in case we need it later
+                    first_alt_pos = p_cntr # just in case we need it later
+                p_cntr += 1
             if cur_alts == 0:
                 if w_pos + window_size < len(exon_idcs) - window_size + 1:
                     w_pos += window_size
@@ -45,4 +47,7 @@ def max_in_window(transcript_dict, alt_set, window_size):
                 sys.stdout.flush()
                 max_alts = cur_alts
                 w_pos = first_alt_pos
+            else:
+                w_pos += first_alt_pos
+                print('sliding to first_alt_pos, {0}'.format(first_alt_pos))
     return max_alts

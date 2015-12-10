@@ -1,0 +1,106 @@
+# coding=utf-8
+__author__ = 'burkhart'
+
+BLOSUM62 = \
+    {frozenset({'F'}): 6.0, frozenset({'R'}): 5.0, frozenset({'L', 'M'}): 2.0, frozenset({'X', 'W'}): -2.0,
+     frozenset({'F', 'R'}): -3.0, frozenset({'H', 'T'}): -2.0, frozenset({'L', 'R'}): -2.0, frozenset({'K', 'Q'}): 1.0,
+     frozenset({'L', 'Y'}): -1.0, frozenset({'P'}): 7.0, frozenset({'Z', 'E'}): 4.0, frozenset({'W', 'Z'}): -3.0,
+     frozenset({'K'}): 5.0, frozenset({'I', 'Y'}): -1.0, frozenset({'Z', 'N'}): 0.0, frozenset({'W', 'E'}): -3.0,
+     frozenset({'C', 'H'}): -3.0, frozenset({'D', 'R'}): -2.0, frozenset({'I', 'P'}): -3.0, frozenset({'H', 'M'}): -2.0,
+     frozenset({'I', 'Q'}): -3.0, frozenset({'K', 'S'}): 0.0, frozenset({'K', 'M'}): -1.0, frozenset({'X', 'H'}): -1.0,
+     frozenset({'W', 'T'}): -2.0, frozenset({'*', 'Q'}): -4.0, frozenset({'G', 'S'}): 0.0, frozenset({'S', 'N'}): 1.0,
+     frozenset({'H', 'D'}): -1.0, frozenset({'I', 'M'}): 1.0, frozenset({'A', 'V'}): 0.0, frozenset({'W', 'R'}): -3.0,
+     frozenset({'H', 'L'}): -3.0, frozenset({'B', '*\n'}): -4.0, frozenset({'*', 'G'}): -4.0,
+     frozenset({'Z', 'R'}): 0.0, frozenset({'W', 'Q'}): -2.0, frozenset({'L', 'F'}): 0.0, frozenset({'F', 'E'}): -3.0,
+     frozenset({'G'}): 6.0, frozenset({'P', 'N'}): -2.0, frozenset({'S', 'M'}): -1.0, frozenset({'*\n', 'F'}): -4.0,
+     frozenset({'P', '*\n'}): -4.0, frozenset({'G', 'F'}): -3.0, frozenset({'E'}): 5.0, frozenset({'W', 'Y'}): 2.0,
+     frozenset({'H', 'K'}): -1.0, frozenset({'P', 'S'}): -1.0, frozenset({'L', '*\n'}): -4.0, frozenset({'C'}): 9.0,
+     frozenset({'B', 'T'}): -1.0, frozenset({'L', 'E'}): -3.0, frozenset({'X', 'N'}): -1.0,
+     frozenset({'I', '*\n'}): -4.0, frozenset({'S', 'R'}): -1.0, frozenset({'A', 'K'}): -1.0,
+     frozenset({'B', 'S'}): 0.0, frozenset({'T'}): 5.0, frozenset({'C', 'B'}): -3.0, frozenset({'Z', 'M'}): -1.0,
+     frozenset({'H', '*'}): -4.0, frozenset({'V'}): 4.0, frozenset({'T', 'Q'}): -1.0, frozenset({'A', 'Y'}): -2.0,
+     frozenset({'D', 'Y'}): -3.0, frozenset({'L', 'D'}): -4.0, frozenset({'T', 'S'}): 1.0, frozenset({'*', 'K'}): -4.0,
+     frozenset({'H', 'S'}): -1.0, frozenset({'B', 'V'}): -3.0, frozenset({'L', 'V'}): 1.0, frozenset({'Q'}): 5.0,
+     frozenset({'L', 'S'}): -2.0, frozenset({'I', 'X'}): -1.0, frozenset({'B', '*'}): -4.0, frozenset({'F', 'Q'}): -3.0,
+     frozenset({'I', 'Z'}): -3.0, frozenset({'C', 'E'}): -4.0, frozenset({'H', 'W'}): -2.0, frozenset({'K', 'Y'}): -2.0,
+     frozenset({'A', 'R'}): -1.0, frozenset({'I', 'K'}): -3.0, frozenset({'C', 'G'}): -3.0, frozenset({'T', 'V'}): 0.0,
+     frozenset({'F', 'Y'}): 3.0, frozenset({'P', 'T'}): -1.0, frozenset({'C', 'Z'}): -3.0,
+     frozenset({'C', '*\n'}): -4.0, frozenset({'T', 'E'}): -1.0, frozenset({'A', 'F'}): -2.0,
+     frozenset({'D', 'F'}): -3.0, frozenset({'P', 'D'}): -1.0, frozenset({'A', 'P'}): -1.0,
+     frozenset({'*\n', 'V'}): -4.0, frozenset({'T', 'G'}): -2.0, frozenset({'I', 'R'}): -3.0,
+     frozenset({'C', 'V'}): -1.0, frozenset({'*', 'Y'}): -4.0, frozenset({'*', 'Z'}): -4.0,
+     frozenset({'T', '*\n'}): -4.0, frozenset({'A', 'H'}): -2.0, frozenset({'X', 'F'}): -1.0,
+     frozenset({'L', 'Q'}): -2.0, frozenset({'S', 'Y'}): -2.0, frozenset({'V', 'Q'}): -2.0, frozenset({'I', 'S'}): -2.0,
+     frozenset({'P', 'W'}): -4.0, frozenset({'L', 'G'}): -4.0, frozenset({'*\n', 'Q'}): -4.0,
+     frozenset({'W', 'K'}): -3.0, frozenset({'Z', 'F'}): -3.0, frozenset({'W', 'F'}): 1.0,
+     frozenset({'*\n', 'Y'}): -4.0, frozenset({'C', 'K'}): -3.0, frozenset({'D', 'V'}): -3.0,
+     frozenset({'*', 'D'}): -4.0, frozenset({'C', 'F'}): -2.0, frozenset({'P', 'C'}): -3.0, frozenset({'A', 'Z'}): -1.0,
+     frozenset({'D', 'Z'}): 1.0, frozenset({'T', 'K'}): -1.0, frozenset({'A', 'G'}): 0.0, frozenset({'I', 'V'}): 3.0,
+     frozenset({'X', 'L'}): -1.0, frozenset({'I', '*'}): -4.0, frozenset({'A', 'E'}): -1.0, frozenset({'N', 'M'}): -2.0,
+     frozenset({'W'}): 11.0, frozenset({'I', 'D'}): -3.0, frozenset({'A', 'I'}): -1.0, frozenset({'B'}): 4.0,
+     frozenset({'P', 'R'}): -2.0, frozenset({'C', 'S'}): -1.0, frozenset({'A', 'L'}): -1.0, frozenset({'B', 'Q'}): 0.0,
+     frozenset({'K', 'F'}): -3.0, frozenset({'A', 'M'}): -1.0, frozenset({'N', 'E'}): 0.0, frozenset({'W', 'N'}): -4.0,
+     frozenset({'W', 'G'}): -2.0, frozenset({'A', 'D'}): -2.0, frozenset({'G', 'N'}): 0.0, frozenset({'P', 'Q'}): -1.0,
+     frozenset({'P', 'F'}): -4.0, frozenset({'P', 'L'}): -3.0, frozenset({'C', 'T'}): -1.0, frozenset({'B', 'D'}): 4.0,
+     frozenset({'B', 'M'}): -3.0, frozenset({'S', 'V'}): -2.0, frozenset({'A', 'Q'}): -1.0, frozenset({'Q', 'R'}): 1.0,
+     frozenset({'S', 'E'}): 0.0, frozenset({'*\n', 'S'}): -4.0, frozenset({'D', 'K'}): -1.0,
+     frozenset({'H', 'V'}): -3.0, frozenset({'T', 'Z'}): -1.0, frozenset({'M', 'R'}): -1.0, frozenset({'P', 'X'}): -2.0,
+     frozenset({'Z', 'K'}): 1.0, frozenset({'X', 'Q'}): -1.0, frozenset({'L', '*'}): -4.0, frozenset({'B', 'G'}): -1.0,
+     frozenset({'*', 'N'}): -4.0, frozenset({'G', 'R'}): -2.0, frozenset({'*\n', 'R'}): -4.0,
+     frozenset({'B', 'Z'}): 1.0, frozenset({'C', 'R'}): -3.0, frozenset({'X', 'S'}): 0.0, frozenset({'G', 'K'}): -2.0,
+     frozenset({'K', 'N'}): 0.0, frozenset({'V', 'R'}): -3.0, frozenset({'*\n', 'K'}): -4.0,
+     frozenset({'P', 'G'}): -2.0, frozenset({'B', 'E'}): 1.0, frozenset({'K', 'E'}): 1.0, frozenset({'N', 'F'}): -3.0,
+     frozenset({'H'}): 8.0, frozenset({'I', 'E'}): -3.0, frozenset({'W', '*\n'}): -4.0, frozenset({'H', 'Q'}): 0.0,
+     frozenset({'W', '*'}): -4.0, frozenset({'T', 'R'}): -1.0, frozenset({'*', 'S'}): -4.0, frozenset({'W', 'L'}): -2.0,
+     frozenset({'*\n', 'D'}): -4.0, frozenset({'A', '*\n'}): -4.0, frozenset({'W', 'M'}): -1.0,
+     frozenset({'D', 'G'}): -1.0, frozenset({'S', 'Q'}): 0.0, frozenset({'T', 'F'}): -2.0, frozenset({'Y', 'V'}): -1.0,
+     frozenset({'D', 'E'}): 2.0, frozenset({'L', 'K'}): -2.0, frozenset({'X', 'G'}): -1.0, frozenset({'B', 'K'}): 0.0,
+     frozenset({'X', '*\n'}): -4.0, frozenset({'K', 'R'}): 2.0, frozenset({'V', 'M'}): 1.0, frozenset({'X', 'E'}): -1.0,
+     frozenset({'Y', 'M'}): -1.0, frozenset({'B', 'F'}): -3.0, frozenset({'*', 'F'}): -4.0, frozenset({'X', '*'}): -4.0,
+     frozenset({'X', 'Z'}): -1.0, frozenset({'D', 'M'}): -3.0, frozenset({'I', 'G'}): -4.0,
+     frozenset({'*\n', 'E'}): -4.0, frozenset({'W', 'S'}): -3.0, frozenset({'Z', 'V'}): -2.0,
+     frozenset({'L', 'Z'}): -3.0, frozenset({'*\n', 'G'}): -4.0, frozenset({'Z', 'G'}): -2.0,
+     frozenset({'X', 'T'}): 0.0, frozenset({'A', '*'}): -4.0, frozenset({'I'}): 4.0, frozenset({'A', 'B'}): -2.0,
+     frozenset({'H', 'Z'}): 0.0, frozenset({'Y', 'Q'}): -1.0, frozenset({'C', 'N'}): -3.0, frozenset({'P', 'Y'}): -3.0,
+     frozenset({'L'}): 4.0, frozenset({'P', 'Z'}): -1.0, frozenset({'D', 'Q'}): 0.0, frozenset({'M'}): 5.0,
+     frozenset({'B', 'L'}): -4.0, frozenset({'I', 'L'}): 2.0, frozenset({'D'}): 6.0, frozenset({'A'}): 4.0,
+     frozenset({'I', 'B'}): -3.0, frozenset({'Y', 'R'}): -2.0, frozenset({'B', 'Y'}): -3.0, frozenset({'P', 'B'}): -2.0,
+     frozenset({'L', 'T'}): -1.0, frozenset({'F', 'M'}): 0.0, frozenset({'C', 'D'}): -3.0, frozenset({'W', 'B'}): -4.0,
+     frozenset({'I', 'W'}): -3.0, frozenset({'I', 'T'}): -1.0, frozenset({'C', 'M'}): -1.0, frozenset({'X'}): -1.0,
+     frozenset({'Z'}): 4.0, frozenset({'X', 'R'}): -1.0, frozenset({'A', 'S'}): 1.0, frozenset({'N'}): 6.0,
+     frozenset({'Q', 'E'}): 2.0, frozenset({'Z', 'Q'}): 3.0, frozenset({'G', 'M'}): -3.0, frozenset({'T', 'M'}): -1.0,
+     frozenset({'X', 'B'}): -1.0, frozenset({'G', 'Q'}): -2.0, frozenset({'L', 'N'}): -3.0, frozenset({'S', 'F'}): -2.0,
+     frozenset({'I', 'N'}): -3.0, frozenset({'Z', 'Y'}): -2.0, frozenset({'P', 'H'}): -2.0, frozenset({'I', 'F'}): 0.0,
+     frozenset({'P', 'K'}): -1.0, frozenset({'E', 'M'}): -2.0, frozenset({'X', 'D'}): -1.0, frozenset({'W', 'D'}): -4.0,
+     frozenset({'*\n', 'M'}): -4.0, frozenset({'*\n', 'Z'}): -4.0, frozenset({'H', 'R'}): 0.0,
+     frozenset({'N', 'Y'}): -2.0, frozenset({'H', 'B'}): 0.0, frozenset({'V', 'E'}): -2.0, frozenset({'W', 'V'}): -3.0,
+     frozenset({'*', 'M'}): -4.0, frozenset({'K', 'V'}): -2.0, frozenset({'N', 'V'}): -3.0, frozenset({'G', 'V'}): -3.0,
+     frozenset({'X', 'V'}): -1.0, frozenset({'G', 'E'}): -2.0, frozenset({'*', 'R'}): -4.0, frozenset({'I', 'H'}): -3.0,
+     frozenset({'B', 'R'}): -1.0, frozenset({'*\n', 'N'}): -4.0, frozenset({'P', '*'}): -4.0,
+     frozenset({'X', 'Y'}): -1.0, frozenset({'H', 'E'}): 0.0, frozenset({'C', 'W'}): -2.0, frozenset({'*', 'V'}): -4.0,
+     frozenset({'P', 'V'}): -2.0, frozenset({'H', 'N'}): 1.0, frozenset({'H', 'G'}): -2.0, frozenset({'X', 'C'}): -2.0,
+     frozenset({'D', 'S'}): 0.0, frozenset({'T', 'N'}): 0.0, frozenset({'Q', 'M'}): 0.0, frozenset({'P', 'M'}): -2.0,
+     frozenset({'E', 'R'}): 0.0, frozenset({'X', 'K'}): -1.0, frozenset({'A', 'C'}): 0.0, frozenset({'N', 'R'}): 0.0,
+     frozenset({'B', 'N'}): 3.0, frozenset({'*\n', '*'}): 1.0, frozenset({'T', 'Y'}): -2.0, frozenset({'F', 'V'}): -1.0,
+     frozenset({'Z', 'S'}): 0.0, frozenset({'P', 'E'}): -1.0, frozenset({'C', 'L'}): -1.0, frozenset({'T', 'D'}): -1.0,
+     frozenset({'A', 'T'}): 0.0, frozenset({'I', 'C'}): -1.0, frozenset({'N', 'Q'}): 0.0, frozenset({'C', 'Y'}): -2.0,
+     frozenset({'H', '*\n'}): -4.0, frozenset({'X', 'M'}): -1.0, frozenset({'Y', 'E'}): -2.0,
+     frozenset({'T', '*'}): -4.0, frozenset({'H', 'F'}): -1.0, frozenset({'A', 'X'}): 0.0, frozenset({'G', 'Y'}): -3.0,
+     frozenset({'S'}): 4.0, frozenset({'A', 'N'}): -2.0, frozenset({'D', 'N'}): 1.0, frozenset({'A', 'W'}): -3.0,
+     frozenset({'C', '*'}): -4.0, frozenset({'*', 'E'}): -4.0, frozenset({'Y'}): 7.0, frozenset({'H', 'Y'}): 2.0,
+     frozenset({'C', 'Q'}): -3.0}
+
+ILLEGAL_CHARS = '-\n'
+
+
+def blosum_62(char_i, char_j):
+    """
+    simply wraps dictionary and returns 0 in the
+    case illegal chars are found
+    :param char_i:
+    :param char_j:
+    :return:
+    """
+    if char_i not in ILLEGAL_CHARS and char_j not in ILLEGAL_CHARS:
+        return BLOSUM62[frozenset([char_i, char_j])]
+    return 0
