@@ -1,6 +1,4 @@
 import sys
-
-
 from src.lib.AltDensity import max_in_window
 from src.lib.GTFReader import parse_transcripts
 from src.lib.VCFReader import parse_alternates
@@ -24,7 +22,7 @@ s = parse_alternates(sys.argv[3])
 
 ## find max alt density in read-length window
 
-m = max_in_window(d,s,sys.argv[4])
+m = max_in_window(d, s, sys.argv[4])
 print(m)
 
 # Part 2:

@@ -1,4 +1,8 @@
+# coding=utf-8
+
 import re
+
+__author__ = 'burkhart'
 
 _alt_data = '[0-9]+?\s+(?P<locus>[0-9]+)'
 
