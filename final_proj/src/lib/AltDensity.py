@@ -29,6 +29,7 @@ def sort_t(transcript):
     return exon_idcs
 
 def max_in_sorted_t(exon_idcs,alt_set,window_size):
+    max_alts = 0
     print('sliding window over exon_idcs of size {0}...'.format(len(exon_idcs)))
     w_pos = 0
     while(w_pos < len(exon_idcs) - window_size + 1):
@@ -59,3 +60,4 @@ def max_in_sorted_t(exon_idcs,alt_set,window_size):
         else:
             w_pos += first_alt_pos
             print('sliding to first_alt_pos, {0}'.format(first_alt_pos))
+    return max_alts
