@@ -8,9 +8,9 @@ __author__ = 'burkhart'
 def max_in_window(transcript_dict, alt_set, window_size):
     max_alt_ps = set()
     #TODO: Use a threadpool to execute this loop
-    for transcript in transcript_dict.values():
-        sorted_t = sort_t(transcript)
-        mt = max_in_sorted_t(sorted_t,alt_set,window_size)
+    for tid,exons in transcript_dict.items():
+        sorted_t = sort_t(exons)
+        mt = max_in_sorted_t(sorted_t,alt_set,window_size,tid)
         max_alt_ps = mt if len(mt) > len(max_alt_ps) else max_alt_ps
     return max_alt_ps
 
@@ -28,7 +28,7 @@ def sort_t(transcript):
     exon_idcs.sort()
     return exon_idcs
 
-def max_in_sorted_t(exon_idcs,alt_set,window_size):
+def max_in_sorted_t(exon_idcs,alt_set,window_size,tid):
     max_alt_ps = set()
     print('sliding window over exon_idcs of size {0}...'.format(len(exon_idcs)))
     w_pos = 0
@@ -39,7 +39,7 @@ def max_in_sorted_t(exon_idcs,alt_set,window_size):
         print('window:{0}'.format(window))
         first_alt_pos = 0
         p_cntr = w_pos
-        cur_alt_ps = set()
+        cur_alt_ps = set(tid)
         for exon_pos in window:
             p_cntr += 1
             if exon_pos in alt_set:
