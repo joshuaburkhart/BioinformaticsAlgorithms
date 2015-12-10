@@ -13,6 +13,7 @@ def max_in_window(transcript_dict, alt_set, window_size):
         exon_idcs = []
         for exon in transcript:
             exon_idcs += list(range(exon[0], exon[1] + 1))
+        exon_idcs.sort()
         for w_pos in range(0, len(exon_idcs) - window_size + 1):
             window = range(w_pos, w_pos + window_size)
             cur_alts = 0

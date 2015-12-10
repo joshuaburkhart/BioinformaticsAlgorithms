@@ -15,8 +15,8 @@ def parse_transcripts(gtf_filename):
             break
         m = re.match(_exon_locus_and_transcript, line)
         if m:
-            s = m.group('start')
-            e = m.group('end')
+            s = int(m.group('start'))
+            e = int(m.group('end'))
             t = m.group('tid')
             if(t in d):
                 d[t].append((s,e))
