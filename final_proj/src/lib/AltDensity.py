@@ -12,7 +12,12 @@ def max_in_window(transcript_dict, alt_set, window_size):
         sys.stdout.flush()
         exon_idcs = []
         for exon in transcript:
-            exon_idcs += list(range(exon[0], exon[1] + 1))
+            try:
+                exon_idcs += list(range(exon[0], exon[1] + 1))
+            except IndexError:
+                print('exon:{0}, exon[0]:{1}, exon[1]:{2}, exon[1] + 1:{3}, list(range(exon[0], exon[1] + 1)):{4}, exon_idcs:{5}'.format(
+                    exon,exon[0],exon[1],exon[1] + 1, list(range(exon[0], exon[1] + 1)), exon_idcs
+                ))
         exon_idcs.sort()
         for w_pos in range(0, len(exon_idcs) - window_size + 1):
             window = range(w_pos, w_pos + window_size)
