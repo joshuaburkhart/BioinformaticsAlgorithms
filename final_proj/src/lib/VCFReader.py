@@ -13,8 +13,9 @@ def parse_alternates(vcf_filename):
         line = in_fptr.readline()
         if not line:
             break
-        m = re.fullmatch(_alt_data, line)
+        m = re.match(_alt_data, line)
         if m:
+            print('locus:{0}'.format(m.group('locus')))
             s.append(m.group('locus'))
     in_fptr.close()
     return s

@@ -20,11 +20,13 @@ _vcf = sys.argv[3]
 
 print('parsing transcripts from {0}...'.format(_gtf))
 d = parse_transcripts(_gtf)
+print('len(d):{0}'.format(len(d)))
 
 ## read .vcf file, store alt locations & counts?
 
 print('parsing alternates from {0}...'.format(_vcf))
 s = parse_alternates(_vcf)
+print('len(s):{0}'.format(len(s)))
 
 ## find max alt density in read-length window
 
