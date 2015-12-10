@@ -36,10 +36,12 @@ def max_in_window(transcript_dict, alt_set, window_size):
             if cur_alts == 0:
                 if w_pos + window_size < len(exon_idcs) - window_size + 1:
                     w_pos += window_size
+                    print('incrementing by window size..')
                 else:
                     w_pos = len(exon_idcs) - window_size + 1
+                    print('overlapping last window..')
             elif cur_alts > max_alts:
-                print('max_alts set to {0}'.format(max_alts))
+                print('max_alts set to {0}'.format(cur_alts))
                 sys.stdout.flush()
                 max_alts = cur_alts
                 w_pos = first_alt_pos
