@@ -41,10 +41,12 @@ def max_in_sorted_t(exon_idcs,alt_set,window_size):
         p_cntr = w_pos
         cur_alts = 0
         for exon_pos in window:
+            p_cntr += 1
             if exon_pos in alt_set:
                 cur_alts += 1
-                first_alt_pos = p_cntr # just in case we need it later
-            p_cntr += 1
+                if first_alt_pos == 0:
+                    first_alt_pos = p_cntr # just in case we need it later
+
         if cur_alts == 0:
             if w_pos + window_size < len(exon_idcs) - window_size + 1:
                 w_pos += window_size
