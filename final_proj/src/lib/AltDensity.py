@@ -1,6 +1,7 @@
 # coding=utf-8
 
 import sys
+from multiprocessing import Pool
 
 __author__ = 'burkhart'
 
@@ -33,7 +34,7 @@ def max_in_window(transcript_dict, alt_set, window_size):
                     cur_alts += 1
                     first_alt_pos = pos + w_pos
             if cur_alts == 0:
-                w_pos = cur_alts
+                w_pos += window_size
             elif cur_alts > max_alts:
                 print('max_alts set to {0}'.format(max_alts))
                 sys.stdout.flush()
