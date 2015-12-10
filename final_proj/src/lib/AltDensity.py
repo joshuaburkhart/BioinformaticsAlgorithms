@@ -39,7 +39,7 @@ def max_in_sorted_t(exon_idcs,alt_set,window_size,tid):
         print('window:{0}'.format(window))
         first_alt_pos = 0
         p_cntr = w_pos
-        cur_alt_ps = set(tid)
+        cur_alt_ps = set()
         for exon_pos in window:
             p_cntr += 1
             if exon_pos in alt_set:
@@ -62,4 +62,5 @@ def max_in_sorted_t(exon_idcs,alt_set,window_size,tid):
         else:
             w_pos += first_alt_pos
             print('sliding to first_alt_pos, {0}'.format(first_alt_pos))
+    max_alt_ps.add(tid)
     return max_alt_ps
