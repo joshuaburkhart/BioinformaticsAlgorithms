@@ -10,7 +10,7 @@ if len(sys.argv) != 4:
     print(USAGE)
     exit()
 
-_read_len = sys.argv[1]
+_read_len = int(sys.argv[1])
 _gtf = sys.argv[2]
 _vcf = sys.argv[3]
 
