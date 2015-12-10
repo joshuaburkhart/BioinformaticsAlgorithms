@@ -32,7 +32,7 @@ print('len(s):{0}'.format(len(s)))
 
 print('finding max alt density in {0}nt window...'.format(_read_len))
 m = max_in_window(d, s, _read_len)
-print('max alts in {0}nt window = {1}'.format(_read_len,m))
+print('max alts in {0}nt window = {1}: {2}'.format(_read_len,len(m)),m)
 
 # Part 2:
 
