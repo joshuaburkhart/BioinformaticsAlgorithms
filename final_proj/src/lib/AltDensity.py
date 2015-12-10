@@ -25,7 +25,8 @@ def sort_t(transcript):
         except IndexError:
             print('exon:{0}'.format(exon))
     print('sorting exon_idcs in case transcript was antisense')
-    return exon_idcs.sort()
+    exon_idcs.sort()
+    return exon_idcs
 
 def max_in_sorted_t(exon_idcs,alt_set,window_size):
     print('sliding window over exon_idcs of size {0}...'.format(len(exon_idcs)))
