@@ -7,7 +7,7 @@ __author__ = 'burkhart'
 def max_in_window(transcript_dict, alt_set, window_size):
     max_alts = 0
     #TODO: Use a threadpool to execute this loop
-    for transcript in transcript_dict:
+    for transcript in transcript_dict.values():
         print('.',end="")
         sys.stdout.flush()
         exon_idcs = []
