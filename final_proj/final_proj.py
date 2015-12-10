@@ -10,20 +10,27 @@ if len(sys.argv) != 4:
     print(USAGE)
     exit()
 
+_read_len = sys.argv[1]
+_gtf = sys.argv[2]
+_vcf = sys.argv[3]
+
 # Part 1:
 
 ## read .gtf file, store exons by transcript id
 
-d = parse_transcripts(sys.argv[2])
+print('parsing transcripts from {0}...'.format(_gtf))
+d = parse_transcripts(_gtf)
 
 ## read .vcf file, store alt locations & counts?
 
-s = parse_alternates(sys.argv[3])
+print('parsing alternates from {0}...'.format(_vcf))
+s = parse_alternates(_vcf)
 
 ## find max alt density in read-length window
 
-m = max_in_window(d, s, sys.argv[4])
-print(m)
+print('finding max alt density in {0}nt window...'.format(_read_len))
+m = max_in_window(d, s, _read_len)
+print('max alts in {0}nt window = {1}'.format(_read_len,m))
 
 # Part 2:
 
@@ -42,3 +49,5 @@ print(m)
 ## adjust m down to less than minimum support
 
 ## + ceil/floor entropy, error rate ? assess
+
+print('done.')
