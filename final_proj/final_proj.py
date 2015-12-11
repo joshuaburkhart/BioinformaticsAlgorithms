@@ -9,7 +9,7 @@ USAGE = 'Usage: python3 final_proj.py \
         'Example: python3 final_proj.py 100 ./data/input/example.gtf \
         ./data/input/example.vcf ./data/input/example.fasta'
 
-if len(sys.argv) != 4:
+if len(sys.argv) != 5:
     print(USAGE)
     exit()
 
