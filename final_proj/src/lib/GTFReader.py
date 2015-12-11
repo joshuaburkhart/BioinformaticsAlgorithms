@@ -4,7 +4,9 @@ import re
 
 __author__ = 'burkhart'
 
+#TODO: make this regex faster.. maybe replace .+? with \w
 _exon_locus_and_transcript = '.+?\t.+?\texon\t(?P<start>[0-9]+)\t(?P<end>[0-9]+)\t.+?\t.+?\t.+?\t.*?transcript_id\s\"(?P<tid>[A-Z0-9]+)\"'
+
 
 def parse_transcripts(gtf_filename):
     d = {}
