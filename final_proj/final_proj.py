@@ -52,7 +52,7 @@ a_g = p[3] * math.log2(p[3]) * p[3]
 a = - sum([a_a,a_t,a_c,a_g])
 r = i/a
 
-print('average information possible:{0}, average actual information: {1}, ratio: {2}'.format(
+print('UR entropy: {0}, true entropy: {1}, ratio: {2}'.format(
     i,a,r
 ))
 
