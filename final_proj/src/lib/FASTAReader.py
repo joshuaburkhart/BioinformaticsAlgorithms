@@ -35,6 +35,9 @@ def pct_char(char):
     else:
         return 0
 
+def t_len():
+    return len(_tr_nt_mset) - 1
+
 #TODO: remove this duplicate code (from AltDensity)
 def sort_t(transcript):
     print('T',end="")

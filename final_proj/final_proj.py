@@ -1,8 +1,10 @@
 import sys
+import math
+
 from src.lib.AltDensity import max_in_window
 from src.lib.GTFReader import parse_transcripts
 from src.lib.VCFReader import parse_alternates
-from src.lib.FASTAReader import parse_fasta,build_transcriptome_multiset,pct_char
+from src.lib.FASTAReader import parse_fasta,build_transcriptome_multiset,pct_char,t_len
 
 USAGE = 'Usage: python3 final_proj.py \
         <read length> <gtf file> <vcf file> <reference gtf>\n' \
@@ -34,10 +36,23 @@ print('len(d):{0}'.format(len(d)))
 
 f = parse_fasta(_fasta)
 t = build_transcriptome_multiset(d)
+p = [pct_char('A'),pct_char('T'),pct_char('C'),pct_char('G')]
 print('A:{0}, T:{1}, C:{2}, G:{3}'.format(
-    pct_char('A'),pct_char('T'),pct_char('C'),pct_char('G')))
+    p[0],p[1],p[3],p[4]))
 
 ## calculate entropy using 0-order markov model
+
+i = - (.24 * math.log2(.25) * t_len())
+a = - (max(p) * [pct * math.log2(pct) for pct in p if p!= max(p)]) * t_len()
+r = i/a
+
+print('information average possible:{0}, actual information: {1}, ratio: {2}'.format(
+    i,a,r
+))
+
+print('length adjustment: {0} -> {1}'.format(
+    _read_len,float(_read_len)/r
+))
 
 ## increase n to mimic maximum information (minimum entropy)
 
@@ -60,7 +75,7 @@ print('len(s):{0}'.format(len(s)))
 ## find max alt density in read-length window
 
 print('finding max alt density in {0}nt window...'.format(_read_len))
-m = max_in_window(d, s, _read_len).sort()
+m = [max_in_window(d, s, _read_len)].sort()
 print('max alts in {0}nt window = {1}: {2}'.format(_read_len,len(m),m))
 
 print('done.')
