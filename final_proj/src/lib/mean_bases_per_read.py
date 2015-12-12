@@ -16,9 +16,12 @@ def parse_fastq(fq):
             else:
                 d[Ns] = 1
                 print('Read with {0} Ns detected: {1}'.format(Ns,line.rstrip()))
-            next(FileObj)
-            next(FileObj)
-            next(FileObj)
+            try:
+                next(FileObj)
+                next(FileObj)
+                next(FileObj)
+            except StopIteration:
+                break
     print(d)
 
 parse_fastq(sys.argv[1])
