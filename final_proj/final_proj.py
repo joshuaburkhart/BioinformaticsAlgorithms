@@ -79,7 +79,9 @@ print('len(s):{0}'.format(len(s)))
 ## find max alt density in read-length window
 
 print('finding max alt density in {0}nt window...'.format(_read_len))
-m = [max_in_window(d, s, _read_len)].sort()
-print('max alts in {0}nt window = {1}: {2}'.format(_read_len,len(m)-1,m))
+m = max_in_window(d, s, _read_len)
+mlist = [m]
+mlist.sort()
+print('max alts in {0}nt window = {1}: {2}'.format(_read_len,len(mlist)-1,mlist))
 
 print('done.')
