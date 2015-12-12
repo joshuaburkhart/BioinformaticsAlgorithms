@@ -2,9 +2,10 @@
 import sys
 import re
 
+_coord_cnts
 _fasta_data = '[ATCGNatcgn]+'
 _fasta_nt_list = ['\x00'] # prepend with null byte for 1-indexed coord system
-_transcriptome_nt_multiset = []
+_tr_nt_mset = [] # transcriptome nucleotide multiset
 
 def parse_fasta(fasta_filename):
     global _fasta_nt_list
@@ -22,18 +23,16 @@ def parse_fasta(fasta_filename):
 #TODO: use list comprehensions
 def build_transcriptome_multiset(transcript_dict):
     global _fasta_nt_list
-    global _transcriptome_nt_multiset
-    for tid,exons in transcript_dict.items():
+    global _tr_nt_mset
+    for exons in transcript_dict.values():
         sorted_t = sort_t(exons)
-        for coord in sorted_t:
-            if coord in _fasta_nt_list:
-                _transcriptome_nt_multiset.append(_fasta_nt_list[coord].upper())
+        [_tr_nt_mset.append(_fasta_nt_list[coord].upper()) for coord in sorted_t]
 
 def pct_char(char):
-    if char.upper() in _transcriptome_nt_multiset:
+    if char.upper() in _tr_nt_mset:
         return \
-            float(_transcriptome_nt_multiset.count(char.upper()))/ \
-            float(len(_transcriptome_nt_multiset) - 1)# subtract 1 for null byte due to 1-based coord system
+            float(_tr_nt_mset.count(char.upper())) / \
+            float(len(_tr_nt_mset) - 1)# subtract 1 for null byte due to 1-based coord system
     else:
         return 0
 
