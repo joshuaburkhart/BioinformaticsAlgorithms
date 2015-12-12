@@ -34,6 +34,7 @@ print('len(d):{0}'.format(len(d)))
 
 ## prob of each base
 
+print('calculating probability of each base...')
 f = parse_fasta(_fasta)
 t = build_transcriptome_multiset(d)
 p = [pct_char('A'),pct_char('T'),pct_char('C'),pct_char('G')]
@@ -42,12 +43,13 @@ print('A:{0}, T:{1}, C:{2}, G:{3}'.format(
 
 ## calculate entropy using 0-order markov model
 
+print('calculating entropy...')
 i = - .24 * math.log2(.25)
 a_a = p[0] * math.log2(p[0]) * p[0]
 a_t = p[1] * math.log2(p[1]) * p[1]
 a_c = p[2] * math.log2(p[2]) * p[2]
 a_g = p[3] * math.log2(p[3]) * p[3]
-a = - sum(a_a,a_t,a_c,a_g)
+a = - sum([a_a,a_t,a_c,a_g])
 r = i/a
 
 print('average information possible:{0}, average actual information: {1}, ratio: {2}'.format(
