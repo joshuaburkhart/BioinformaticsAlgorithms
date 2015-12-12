@@ -9,8 +9,10 @@ def parse_fastq(fq):
     d = {}
     with open(fq) as FileObj:
         next(FileObj)
+        read_cnt = 0
         for line in FileObj:
             Ns = line.count('N')
+            read_cnt += 1
             if Ns in d:
                 d[Ns] += 1
             else:
@@ -23,5 +25,7 @@ def parse_fastq(fq):
             except StopIteration:
                 break
     print(d)
+    print('read_cnt: {0}'.format(read_cnt))
+
 
 parse_fastq(sys.argv[1])
