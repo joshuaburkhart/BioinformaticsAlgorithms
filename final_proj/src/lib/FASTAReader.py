@@ -2,7 +2,6 @@
 import sys
 import re
 
-_coord_cnts
 _fasta_data = '[ATCGNatcgn]+'
 _fasta_nt_list = ['\x00'] # prepend with null byte for 1-indexed coord system
 _tr_nt_mset = [] # transcriptome nucleotide multiset
