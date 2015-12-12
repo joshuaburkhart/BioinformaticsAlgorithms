@@ -25,7 +25,7 @@ def parse_fastq(fastq_filename):
 
 def pct_read_chr_cnt(char):
     if char.upper() in _char_cnts:
-        return float(_char_cnts[char.upper]) / float(_len)
+        return float(_char_cnts[char.upper()]) / float(_len)
     else:
         return 0
 
