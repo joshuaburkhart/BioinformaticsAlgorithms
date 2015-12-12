@@ -4,7 +4,7 @@ import math
 from src.lib.AltDensity import max_in_window
 from src.lib.GTFReader import parse_transcripts
 from src.lib.VCFReader import parse_alternates
-from src.lib.FASTAReader import parse_fasta,build_transcriptome_multiset,pct_char,t_len
+from src.lib.FASTAReader import parse_fasta,build_transcriptome_multiset,pct_char,t_len,cnt_char
 
 USAGE = 'Usage: python3 final_proj.py \
         <read length> <gtf file> <vcf file> <reference gtf>\n' \
@@ -42,11 +42,15 @@ print('A:{0}, T:{1}, C:{2}, G:{3}'.format(
 
 ## calculate entropy using 0-order markov model
 
-i = - (.24 * math.log2(.25) * t_len())
-a = - (max(p) * [pct * math.log2(pct) for pct in p if p!= max(p)]) * t_len()
+i = - .24 * math.log2(.25)
+a_a = p[0] * math.log2(p[0]) * p[0]
+a_t = p[1] * math.log2(p[1]) * p[1]
+a_c = p[2] * math.log2(p[2]) * p[2]
+a_g = p[3] * math.log2(p[3]) * p[3]
+a = - sum(a_a,a_t,a_c,a_g)
 r = i/a
 
-print('information average possible:{0}, actual information: {1}, ratio: {2}'.format(
+print('average information possible:{0}, average actual information: {1}, ratio: {2}'.format(
     i,a,r
 ))
 
