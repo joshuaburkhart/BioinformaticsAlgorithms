@@ -34,3 +34,4 @@ def read_char_entropy():
     for char_cnt in _char_cnts.values():
         prob = float(char_cnt)/float(_len)
         e += -(prob * math.log2(prob)) * char_cnt
+    return e
