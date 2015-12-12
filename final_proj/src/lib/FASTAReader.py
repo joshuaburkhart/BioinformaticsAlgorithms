@@ -40,15 +40,15 @@ def t_len():
 
 #TODO: remove this duplicate code (from AltDensity)
 def sort_t(transcript):
-    print('T',end="")
+    #print('T',end="")
     sys.stdout.flush()
     exon_idcs = []
-    print('adding exons to exon_idcs...')
+    #print('adding exons to exon_idcs...')
     for exon in transcript:
         try:
             exon_idcs += list(range(exon[0], exon[1] + 1))
         except IndexError:
             print('exon:{0}'.format(exon))
-    print('sorting exon_idcs in case transcript was antisense')
+    #print('sorting exon_idcs in case transcript was antisense')
     exon_idcs.sort()
     return exon_idcs
