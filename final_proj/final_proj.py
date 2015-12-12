@@ -38,7 +38,7 @@ f = parse_fasta(_fasta)
 t = build_transcriptome_multiset(d)
 p = [pct_char('A'),pct_char('T'),pct_char('C'),pct_char('G')]
 print('A:{0}, T:{1}, C:{2}, G:{3}'.format(
-    p[0],p[1],p[3],p[4]))
+    p[0],p[1],p[2],p[3]))
 
 ## calculate entropy using 0-order markov model
 
@@ -50,13 +50,11 @@ print('information average possible:{0}, actual information: {1}, ratio: {2}'.fo
     i,a,r
 ))
 
+## increase n to mimic maximum information (minimum entropy)
+
 print('length adjustment: {0} -> {1}'.format(
     _read_len,float(_read_len)/r
 ))
-
-## increase n to mimic maximum information (minimum entropy)
-
-## how good was our last model?
 
 ## review minimum supported feature from previous alignment
 
@@ -76,6 +74,6 @@ print('len(s):{0}'.format(len(s)))
 
 print('finding max alt density in {0}nt window...'.format(_read_len))
 m = [max_in_window(d, s, _read_len)].sort()
-print('max alts in {0}nt window = {1}: {2}'.format(_read_len,len(m),m))
+print('max alts in {0}nt window = {1}: {2}'.format(_read_len,len(m)-1,m))
 
 print('done.')
