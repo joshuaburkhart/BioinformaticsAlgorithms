@@ -47,7 +47,7 @@ print('A: {0}, T: {1}, C: {2}, G: {3}'.format(
 ## calculate entropy using 0-order markov model
 
 print('calculating entropy in reference...')
-i = - .24 * math.log2(.25)
+i = - .25 * math.log2(.25) * .25
 a_a = p[0] * math.log2(p[0]) * p[0]
 a_t = p[1] * math.log2(p[1]) * p[1]
 a_c = p[2] * math.log2(p[2]) * p[2]
@@ -59,6 +59,7 @@ print('UR entropy: {0}, true entropy: {1}, ratio: {2}'.format(
     i,a,r
 ))
 
+"""
 ## increase n to mimic maximum information (minimum entropy)
 
 print('length adjustment: {0} -> {1}'.format(
@@ -78,6 +79,7 @@ print('A: {0}, T: {1}, C: {2}, G: {3}'.format(
 
 ent = read_char_entropy()
 print('Read entropy: {0}'.format(ent))
+"""
 
 ## review minimum supported feature from previous alignment
 
