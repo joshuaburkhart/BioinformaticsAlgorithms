@@ -20,7 +20,7 @@ def parse_fastq(fastq_filename):
                         _char_cnts[char.upper()] += 1
                     else:
                         _char_cnts[char.upper()] = 1
-            _len += 1
+                _len += 1
     in_fptr.close()
 
 def pct_read_chr_cnt(char):
