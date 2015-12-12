@@ -4,7 +4,7 @@ import math
 from src.lib.AltDensity import max_in_window
 from src.lib.GTFReader import parse_transcripts
 from src.lib.VCFReader import parse_alternates
-from src.lib.FASTAReader import parse_fasta,build_transcriptome_multiset,pct_char,t_len,cnt_char
+from src.lib.FASTAReader import parse_fasta,build_transcriptome_multiset,pct_char,t_len
 
 USAGE = 'Usage: python3 final_proj.py \
         <read length> <gtf file> <vcf file> <reference gtf>\n' \
