@@ -15,8 +15,8 @@ def max_in_window(transcript_dict, alt_set, window_size):
     return max_alt_ps
 
 def sort_t(transcript):
-    print('T',end="")
-    sys.stdout.flush()
+    #print('T',end="")
+    #sys.stdout.flush()
     exon_idcs = []
     #print('adding exons to exon_idcs...')
     for exon in transcript:
@@ -34,8 +34,8 @@ def max_in_sorted_t(exon_idcs,alt_set,window_size,tid):
     w_pos = 0
     while(w_pos < len(exon_idcs) - window_size + 1):
         window = range(exon_idcs[w_pos], exon_idcs[w_pos] + window_size)
-        print('.',end="")
-        sys.stdout.flush()
+        #print('.',end="")
+        #sys.stdout.flush()
         #print('window:{0}'.format(window))
         first_alt_pos = 0
         p_cntr = w_pos
