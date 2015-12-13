@@ -41,15 +41,16 @@ def sort_t(transcript):
 
 def max_in_sorted_t(exon_idcs, alt_set, window_size, tid):
     max_window_alts = set()
+    cur_window_alts = set()
     if len(exon_idcs) < window_size: window_size = len(exon_idcs)
     for window_pos in range(0, len(exon_idcs) - window_size):
-        cur_window_alts = set()
-        [cur_window_alts.add(nt_pos) for nt_pos in range(exon_idcs[window_pos], exon_idcs[window_pos + window_size]) if
-         nt_pos in alt_set]
+        cur_window_alts.clear()
+        [cur_window_alts.add(nt_pos) for nt_pos
+         in range(exon_idcs[window_pos], exon_idcs[window_pos + window_size])
+         if nt_pos in alt_set]
         if len(cur_window_alts) > len(max_window_alts): max_window_alts = cur_window_alts
     max_window_alts.add(tid)
     return max_window_alts
-
 
 '''
 def max_in_sorted_t(exon_idcs,alt_set,window_size,tid):
