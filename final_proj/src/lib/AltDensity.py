@@ -12,6 +12,13 @@ def max_in_window(transcript_dict, alt_set, window_size):
         sorted_t = sort_t(exons)
         mt = max_in_sorted_t(sorted_t,alt_set,window_size,tid)
         max_alt_ps = mt if len(mt) > len(max_alt_ps) else max_alt_ps
+        if tid == 'ENSMUST00000168184':
+            print('DETECTED TARGET:')
+            print('TID: {0}'.format(tid))
+            print('EXONS: {0}'.format(exons))
+            print('SORTED_T: {0}'.format(sorted_t))
+            print('MT: {0}'.format(mt))
+            print('MAX_ALT_PS: {0}'.format(max_alt_ps))
     return max_alt_ps
 
 def sort_t(transcript):
