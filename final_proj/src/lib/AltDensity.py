@@ -11,7 +11,8 @@ def max_in_window(transcript_dict, alt_set, window_size):
     for tid,exons in transcript_dict.items():
         sorted_t = sort_t(exons)
         mt = max_in_sorted_t(sorted_t,alt_set,window_size,tid)
-        max_alt_ps = mt if len(mt) > len(max_alt_ps) else max_alt_ps
+        if len(mt) > len(max_alt_ps):
+            max_alt_ps = mt
         if tid == 'ENSMUST00000168184':
             print('DETECTED TARGET:')
             print('TID: {0}'.format(tid))
@@ -35,6 +36,21 @@ def sort_t(transcript):
     exon_idcs.sort()
     return exon_idcs
 
+def max_in_sorted_t(exon_idcs,alt_set,window_size,tid):
+    max_window_alts = set()
+    if len(exon_idcs) < window_size:
+        window_size = len(exon_idcs)
+    for window_pos in range(0,len(exon_idcs) - window_size):
+        cur_window_alts = set()
+        for nt_pos in range(exon_idcs[window_pos],exon_idcs[window_pos + window_size]):
+            if nt_pos in alt_set:
+                cur_window_alts.add(nt_pos)
+        if len(cur_window_alts) > len(max_window_alts):
+            max_window_alts = cur_window_alts
+    max_window_alts.add(tid)
+    return max_window_alts
+
+'''
 def max_in_sorted_t(exon_idcs,alt_set,window_size,tid):
     max_alt_ps = set()
     #print('sliding window over exon_idcs of size {0}...'.format(len(exon_idcs)))
@@ -71,3 +87,4 @@ def max_in_sorted_t(exon_idcs,alt_set,window_size,tid):
             #print('sliding to first_alt_pos, {0}'.format(first_alt_pos))
     max_alt_ps.add(tid)
     return max_alt_ps
+'''
