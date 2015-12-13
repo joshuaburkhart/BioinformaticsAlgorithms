@@ -5,12 +5,13 @@ from multiprocessing import Pool
 
 __author__ = 'burkhart'
 
+
 def max_in_window(transcript_dict, alt_set, window_size):
     max_alt_ps = set()
-    #TODO: Use a threadpool to execute this loop
-    for tid,exons in transcript_dict.items():
+    # TODO: Use a threadpool to execute this loop
+    for tid, exons in transcript_dict.items():
         sorted_t = sort_t(exons)
-        mt = max_in_sorted_t(sorted_t,alt_set,window_size,tid)
+        mt = max_in_sorted_t(sorted_t, alt_set, window_size, tid)
         if len(mt) > len(max_alt_ps):
             max_alt_ps = mt
         if tid == 'ENSMUST00000168184':
@@ -22,33 +23,33 @@ def max_in_window(transcript_dict, alt_set, window_size):
             print('MAX_ALT_PS: {0}'.format(max_alt_ps))
     return max_alt_ps
 
+
 def sort_t(transcript):
-    #print('T',end="")
-    #sys.stdout.flush()
+    # print('T',end="")
+    # sys.stdout.flush()
     exon_idcs = []
-    #print('adding exons to exon_idcs...')
+    # print('adding exons to exon_idcs...')
     for exon in transcript:
         try:
             exon_idcs += list(range(exon[0], exon[1] + 1))
         except IndexError:
             print('exon:{0}'.format(exon))
-    #print('sorting exon_idcs in case transcript was antisense')
+    # print('sorting exon_idcs in case transcript was antisense')
     exon_idcs.sort()
     return exon_idcs
 
-def max_in_sorted_t(exon_idcs,alt_set,window_size,tid):
+
+def max_in_sorted_t(exon_idcs, alt_set, window_size, tid):
     max_window_alts = set()
-    if len(exon_idcs) < window_size:
-        window_size = len(exon_idcs)
-    for window_pos in range(0,len(exon_idcs) - window_size):
+    if len(exon_idcs) < window_size: window_size = len(exon_idcs)
+    for window_pos in range(0, len(exon_idcs) - window_size):
         cur_window_alts = set()
-        for nt_pos in range(exon_idcs[window_pos],exon_idcs[window_pos + window_size]):
-            if nt_pos in alt_set:
-                cur_window_alts.add(nt_pos)
-        if len(cur_window_alts) > len(max_window_alts):
-            max_window_alts = cur_window_alts
+        [cur_window_alts.add(nt_pos) for nt_pos in range(exon_idcs[window_pos], exon_idcs[window_pos + window_size]) if
+         nt_pos in alt_set]
+        if len(cur_window_alts) > len(max_window_alts): max_window_alts = cur_window_alts
     max_window_alts.add(tid)
     return max_window_alts
+
 
 '''
 def max_in_sorted_t(exon_idcs,alt_set,window_size,tid):
