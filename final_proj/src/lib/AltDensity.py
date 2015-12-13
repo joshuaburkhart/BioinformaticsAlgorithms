@@ -57,7 +57,7 @@ def max_in_sorted_t(exon_idcs,alt_set,window_size,tid):
     max_alt_ps = set()
     #print('sliding window over exon_idcs of size {0}...'.format(len(exon_idcs)))
     w_pos = 0
-    while(w_pos < len(exon_idcs) - window_size + 1):
+    while(w_pos < len(exon_idcs) - window_size):
         window = exon_idcs[w_pos:w_pos + window_size]
         #print('.',end="")
         #sys.stdout.flush()
